@@ -3,6 +3,7 @@ import torch
 import numpy as np
 from transparent_background import Remover
 from tqdm import tqdm
+import folder_paths
 
 
 # Tensor to PIL
@@ -22,7 +23,8 @@ class InspyrenetRembg:
         return {
             "required": {
                 "image": ("IMAGE",),
-                "torchscript_jit": (["default", "on"],)
+                "torchscript_jit": (["default", "on"],),
+                "model": (folder_paths.get_filename_list("transparent-background"), {"tooltip": "The name of the transparent-background (model) to load."}),
             },
         }
 
@@ -30,11 +32,12 @@ class InspyrenetRembg:
     FUNCTION = "remove_background"
     CATEGORY = "image"
 
-    def remove_background(self, image, torchscript_jit):
+    def remove_background(self, image, torchscript_jit, model):
+        model_path = folder_paths.get_full_path_or_raise("transparent-background", model)
         if (torchscript_jit == "default"):
-            remover = Remover()
+            remover = Remover(ckpt=model_path)
         else:
-            remover = Remover(jit=True)
+            remover = Remover(ckpt=model_path, jit=True)
         img_list = []
         for img in tqdm(image, "Inspyrenet Rembg"):
             mid = remover.process(tensor2pil(img), type='rgba')
