@@ -4,6 +4,7 @@ import numpy as np
 from transparent_background import Remover
 from tqdm import tqdm
 import folder_paths
+import os
 
 # set the models directory
 if "transparent_background" not in folder_paths.folder_names_and_paths:
