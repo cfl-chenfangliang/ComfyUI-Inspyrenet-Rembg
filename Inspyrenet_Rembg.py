@@ -11,7 +11,8 @@ if "transparent_background" not in folder_paths.folder_names_and_paths:
     current_paths = [os.path.join(folder_paths.models_dir, "transparent_background")]
 else:
     current_paths, _ = folder_paths.folder_names_and_paths["transparent_background"]
-folder_paths.folder_names_and_paths["transparent_background"] = (current_paths, {'.pth'})
+print('current_paths:', current_paths)
+folder_paths.folder_names_and_paths["transparent_background"] = (current_paths, folder_paths.supported_pt_extensions)
 
 
 # Tensor to PIL
