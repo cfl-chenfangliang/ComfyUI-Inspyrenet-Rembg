@@ -8,12 +8,9 @@ import os
 
 # set the models directory
 if "transparent_background" not in folder_paths.folder_names_and_paths:
-    print('111')
     current_paths = [os.path.join(folder_paths.models_dir, "transparent_background")]
 else:
     current_paths, _ = folder_paths.folder_names_and_paths["transparent_background"]
-print('folder_paths.models_dir:', folder_paths.models_dir)
-print('current_paths:', current_paths)
 folder_paths.folder_names_and_paths["transparent_background"] = (current_paths, folder_paths.supported_pt_extensions)
 
 
