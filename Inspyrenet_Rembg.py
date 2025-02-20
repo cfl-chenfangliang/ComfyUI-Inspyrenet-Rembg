@@ -24,7 +24,7 @@ class InspyrenetRembg:
             "required": {
                 "image": ("IMAGE",),
                 "torchscript_jit": (["default", "on"],),
-                "model": (folder_paths.get_filename_list("transparent-background"), {"tooltip": "The name of the transparent-background (model) to load."}),
+                "model": (folder_paths.get_filename_list("transparent_background"), {"tooltip": "The name of the transparent-background (model) to load."}),
             },
         }
 
@@ -33,7 +33,7 @@ class InspyrenetRembg:
     CATEGORY = "image"
 
     def remove_background(self, image, torchscript_jit, model):
-        model_path = folder_paths.get_full_path_or_raise("transparent-background", model)
+        model_path = folder_paths.get_full_path_or_raise("transparent_background", model)
         if (torchscript_jit == "default"):
             remover = Remover(ckpt=model_path)
         else:
