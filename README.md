@@ -2,7 +2,7 @@
 [ComfyUI](https://github.com/comfyanonymous/ComfyUI) node for background removal, implementing [InSPyReNet](https://github.com/plemeri/InSPyReNet)
 </br></br>
 
-forked from john-mnz/ComfyUI-Inspyrenet-Rembg
+forked from [ComfyUI-Inspyrenet-Rembg](https://github.com/john-mnz/ComfyUI-Inspyrenet-Rembg)
 <br>
 
 # 增加了模型选择
