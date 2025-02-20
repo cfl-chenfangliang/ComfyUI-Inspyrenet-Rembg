@@ -68,7 +68,9 @@ class InspyrenetRembgAdvanced:
             "required": {
                 "image": ("IMAGE",),
                 "threshold": ("FLOAT", {"default": 0.5, "min": 0.0, "max": 1.0, "step": 0.01}),
-                "torchscript_jit": (["default", "on"],)
+                "torchscript_jit": (["default", "on"],),
+                "model": (folder_paths.get_filename_list("transparent_background"), {"tooltip": "The name of the transparent-background (model) to load."}),
+
             },
         }
 
@@ -76,11 +78,13 @@ class InspyrenetRembgAdvanced:
     FUNCTION = "remove_background"
     CATEGORY = "image"
 
-    def remove_background(self, image, torchscript_jit, threshold):
+    def remove_background(self, image, torchscript_jit, threshold, model):
+        model_path = folder_paths.get_full_path_or_raise("transparent_background", model)
+
         if (torchscript_jit == "default"):
-            remover = Remover()
+            remover = Remover(ckpt=model_path)
         else:
-            remover = Remover(jit=True)
+            remover = Remover(ckpt=model_path, jit=True)
         img_list = []
         for img in tqdm(image, "Inspyrenet Rembg"):
             mid = remover.process(tensor2pil(img), type='rgba', threshold=threshold)
